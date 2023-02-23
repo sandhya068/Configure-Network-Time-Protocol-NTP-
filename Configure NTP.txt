@@ -1,0 +1,46 @@
+Hardware Description of Machine:
+
+ISO: CentOS 7
+Memory: 2 GB
+Processors: 1
+Hard Disk(SCSI): 50 GB
+Network Adapter
+
+---------------------------------------------------
+
+
+date						# To display the current date and time 
+
+
+date --set="20230513 05:30"				# Set the system date / time over ssh session
+	Output: Sat May 13 05:30:55 IST 2023
+
+
+yum install ntp					# Install NTP package
+
+
+systemctl start ntpd					# Start the ntp daemon
+
+
+systemctl enable ntpd				# Tells the operating system to start it every time the computer boots up. 
+
+
+systemctl status ntpd					# Confirm the service is running
+
+
+firewall-cmd --add-service=ntp --permanent		# Allow traffic through the firewall on port 123
+
+
+firewall-cmd --reload				# Reload a firewalld configuration
+
+
+vi /etc/ntp.conf					# Synchronization of NTP server with India time. So, replace centos with in
+	server 0.in.pool.ntp.org iburst
+	server 1.in.pool.ntp.org iburst
+	server 2.in.pool.ntp.org iburst
+	server 3.in.pool.ntp.org iburst
+
+
+date						# Now display the current date and time
+	Output: Fri Feb 24 01:38:11 IST 2023
+
